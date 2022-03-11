@@ -21,6 +21,8 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
     "onchange": "^7.1.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
@@ -32,5 +34,15 @@
     "body-parser": "^1.19.2",
     "express": "^4.17.3"
   },
-  "description": ""
+  "description": "",
+   "lint-staged": {
+      "src/**/*.{ts,tsx}": [
+        "npm run lint",
+        "git add"
+      ]
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged && npm run tsc"
+      }
 }

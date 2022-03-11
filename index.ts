@@ -35,6 +35,6 @@ app.get(
     );
   }
 );
-console.loga('abbb');
+console.log('abbb');
 app.listen(5020);
 console.log('b');
