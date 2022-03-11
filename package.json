@@ -1,17 +1,14 @@
 {
   "name": "household_finance",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon",
-    "build": "tsc",
-    "start": "npm run build && node index.js",
-    "dev": "ts-node ./index.ts",
+    "build": "npm run prettier-format && tsc",
+    "start": "npm run build && node ./build/index.js",
+    "dev": "ts-node ./build/index.js",
     "lint": "npm run prettier-format && eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'index.ts' --write",
-    "prettier-watch": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
-    "debug": "node debug index.ts"
+    "prettier-watch": "onchange 'src/**/*.ts' -- prettier --write {{changed}}"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +21,6 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^2.0.15",
     "onchange": "^7.1.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",

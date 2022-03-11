@@ -28,13 +28,13 @@ app.get(
     request: Request,
     response: Response
   ) => {
-    console.log('asd');
+    console.log("asd");
     await sleep(5000);
     response.send(
       'abcdefgihjklmnopqrstuvwxyz'
     );
   }
 );
-console.log('a');
+console.loga('abbb');
 app.listen(5020);
 console.log('b');
