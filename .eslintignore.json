@@ -1,25 +1,4 @@
-{
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-    },
-    "extends": [
-            "eslint:recommended",
-            "plugin:@typescript-eslint/eslint-recommended",
-            "plugin:@typescript-eslint/recommended",
-            "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
-        "no-console": 1,       // Means warning
-        "prettier/prettier": 2 // Means error
-    }
-}
+node_modules/
+build/
+package-lock.json
+dist/

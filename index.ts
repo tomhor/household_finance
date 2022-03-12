@@ -28,7 +28,7 @@ app.get(
     request: Request,
     response: Response
   ) => {
-    console.log("asd");
+    console.log('asd');
     await sleep(5000);
     response.send(
       'abcdefgihjklmnopqrstuvwxyz'
