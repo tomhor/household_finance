@@ -7,4 +7,9 @@ router.post(
   AccountController.createAccount
 );
 
+router.get(
+  '/account',
+  AccountController.getAccount
+);
+
 export default router;

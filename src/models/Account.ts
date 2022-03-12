@@ -2,14 +2,14 @@ import { AccountTypes } from './Enums';
 import { logger } from '../utils/logger';
 
 export class Account {
-  id = 0;
+  _id = 0;
   name = '';
   type: AccountTypes =
     AccountTypes.None;
 
   constructor(account?: Account) {
     if (account) {
-      this.id = account.id;
+      this._id = account._id;
       this.name = account.name;
       this.type = account.type;
     }
@@ -43,5 +43,34 @@ export class Account {
       throw 'invalid params';
     }
     return;
+  }
+
+  static validateBodyGetAccount(
+    body: Account
+  ): void {
+    let isValid = true;
+    if (!body.name) {
+      logger.error('missing body');
+      isValid = false;
+    }
+    if (!isValid) {
+      throw 'invalid params';
+    }
+    return;
+  }
+
+  static parseFromDB(
+    resultElement: any
+  ) {
+    if (!resultElement) {
+      logger.error('account not found');
+      throw 'account not found';
+    }
+    const account = new Account();
+    account._id = resultElement._id;
+    account.name = resultElement.name;
+    account.type =
+      resultElement.type || null;
+    return account;
   }
 }
