@@ -2,10 +2,9 @@ import { AccountTypes } from './Enums';
 import { logger } from '../utils/logger';
 
 export class Account {
-  _id = 0;
+  _id = '';
   name = '';
-  type: AccountTypes =
-    AccountTypes.None;
+  type: AccountTypes = AccountTypes.None;
 
   constructor(account?: Account) {
     if (account) {
@@ -15,27 +14,20 @@ export class Account {
     }
   }
 
-  static parseCreateAccount(
-    body: Account
-  ): Account {
+  static parseCreateAccount(body: Account): Account {
     const account = new Account();
     account.name = body.name;
     account.type = body.type;
     return account;
   }
 
-  static validateBodyCreateAccount(
-    body: Account
-  ): void {
+  static validateBodyCreateAccount(body: Account): void {
     let isValid = true;
     if (!body.name) {
       logger.error('missing body');
       isValid = false;
     }
-    if (
-      !body.type ||
-      !AccountTypes[body.type]
-    ) {
+    if (!body.type || !AccountTypes[body.type]) {
       logger.error(`type is invalid.`);
       isValid = false;
     }
@@ -45,9 +37,7 @@ export class Account {
     return;
   }
 
-  static validateBodyGetAccount(
-    body: Account
-  ): void {
+  static validateBodyGetAccount(body: Account): void {
     let isValid = true;
     if (!body.name) {
       logger.error('missing body');
@@ -59,9 +49,7 @@ export class Account {
     return;
   }
 
-  static parseFromDB(
-    resultElement: any
-  ) {
+  static parseFromDB(resultElement: any) {
     if (!resultElement) {
       logger.error('account not found');
       throw 'account not found';
@@ -69,8 +57,7 @@ export class Account {
     const account = new Account();
     account._id = resultElement._id;
     account.name = resultElement.name;
-    account.type =
-      resultElement.type || null;
+    account.type = resultElement.type || null;
     return account;
   }
 }

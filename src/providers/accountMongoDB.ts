@@ -10,18 +10,21 @@ export class AccountMongoDB {
     this.mongoDB = new MongoDB();
   }
 
-  async getAccountByName(
-    name: string
-  ): Promise<Account> {
+  async createAccount(account: Account): Promise<Account> {
+    try {
+      await this.mongoDB.insert(this.accountsTable, account);
+      return await this.getAccountByName(account.name);
+    } catch (error) {
+      logger.error(error);
+      throw error;
+    }
+  }
+
+  async getAccountByName(name: string): Promise<Account> {
     try {
       const query = { name: name };
-      const result =
-        await this.mongoDB.get(
-          this.accountsTable,
-          query
-        );
-      const account =
-        Account.parseFromDB(result[0]);
+      const result = await this.mongoDB.get(this.accountsTable, query);
+      const account = Account.parseFromDB(result[0]);
       return account;
     } catch (error) {
       logger.error(error);

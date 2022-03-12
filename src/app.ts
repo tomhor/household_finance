@@ -1,7 +1,4 @@
-import express, {
-  Request,
-  Response
-} from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes/routes';
 import { logger } from './utils/logger';
@@ -16,21 +13,11 @@ app.use(
   })
 );
 
-app.get(
-  '/',
-  (
-    request: Request,
-    response: Response
-  ) => response.send('App is working')
-);
+app.get('/', (request: Request, response: Response) => response.send('App is working'));
 
 app.use('/', routes);
 
-app.listen(PORT, () =>
-  logger.info(
-    `server is listening on port ${PORT}`
-  )
-);
+app.listen(PORT, () => logger.info(`server is listening on port ${PORT}`));
 
 module.exports = {
   app
