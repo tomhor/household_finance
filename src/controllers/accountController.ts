@@ -15,7 +15,7 @@ export class AccountController {
       next();
     } catch (error) {
       logger.error(error);
-      response.status(500).send('cant create account. please contact support');
+      response.status(500).send('cant create account. please contact support and sasha');
     }
   }
 
