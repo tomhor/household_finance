@@ -6,4 +6,6 @@ router.post('/account', AccountController.createAccount);
 
 router.get('/account', AccountController.getAccount);
 
+router.post('/child-account', AccountController.createChildAccount);
+
 export default router;

@@ -1,6 +1,6 @@
 export enum AccountTypes {
   None,
   Family,
-  Child,
+  Bank,
   Saved
 }

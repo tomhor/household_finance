@@ -20,6 +20,18 @@ export class AccountMongoDB {
     }
   }
 
+  async updateChildAccounts(account: Account): Promise<Account> {
+    try {
+      const query = { name: account.name };
+      const update = { $set: { accounts: account.accounts } };
+      await this.mongoDB.update(this.accountsTable, query, update);
+      return await this.getAccountByName(account.name);
+    } catch (error) {
+      logger.error(error);
+      throw error;
+    }
+  }
+
   async getAccountByName(name: string): Promise<Account> {
     try {
       const query = { name: name };

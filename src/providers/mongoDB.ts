@@ -5,10 +5,8 @@ import { logger } from '../utils/logger';
 export class MongoDB {
   // Connection URL
   private url = '';
-  private client: MongoClient;
   private dbName = '';
-  private static client: MongoClient;
-  private static dbName: string;
+  private client: MongoClient;
 
   constructor() {
     this.url = this.generateUrlWithUsernameAndPassword();
@@ -16,7 +14,7 @@ export class MongoDB {
     this.client = new MongoClient(this.url);
   }
 
-  static async main() {
+  async main() {
     // Use connect method to connect to the server
     await this.client.connect();
     logger.info('Connected successfully to server');
@@ -46,12 +44,27 @@ export class MongoDB {
 
   async insert(collectionName: string, account: object) {
     // Use connect method to connect to the server
+    logger.info(`params: url:${this.url}, dbName:${this.dbName}`);
+
     await this.client.connect();
     logger.info('Connected successfully to server');
     const db = this.client.db(this.dbName);
     const collection = db.collection(collectionName);
     await collection.insertOne(account);
     logger.info('account insert to DB');
+    await this.client.close();
+    return;
+  }
+
+  async update(collectionName: string, query: object, update: object) {
+    // Use connect method to connect to the server
+    logger.info(`params: url:${this.url}, dbName:${this.dbName}`);
+    await this.client.connect();
+    logger.info('Connected successfully to server');
+    const db = this.client.db(this.dbName);
+    const collection = db.collection(collectionName);
+    await collection.updateOne(query, update);
+    logger.info('account updated to DB');
     await this.client.close();
     return;
   }
